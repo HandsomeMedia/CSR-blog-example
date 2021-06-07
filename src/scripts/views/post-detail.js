@@ -1,5 +1,6 @@
 import { appState } from '../app-state.js'
 import { getPostDetail } from '../services/data.service.js'
+import { fadeOnLoad } from '../utils.js'
 
 const template = data => /*html*/ `
   <style>
@@ -7,6 +8,7 @@ const template = data => /*html*/ `
       box-sizing: border-box;
       font: inherit;
       color: inherit;
+      animation: fade-in 1s ease-out both;
     }
 
     :host{
@@ -62,6 +64,11 @@ const template = data => /*html*/ `
       margin-right: var(--space-sm);
     }
 
+    @keyframes fade-in{
+      from{
+        opacity: 0;
+      }
+    }
   </style>
   <article>
     <figure>
@@ -94,6 +101,7 @@ class PostDetail extends HTMLElement {
     const data = await getPostDetail('./data.json', appState.detailId)
 
     this.shadowRoot.innerHTML = template(data)
+    this.shadowRoot.querySelectorAll('img').forEach(img => fadeOnLoad(img, 1000))
 
     this.addEventListener('click', this)
   }

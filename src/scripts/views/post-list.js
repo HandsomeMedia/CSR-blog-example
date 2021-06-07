@@ -39,10 +39,11 @@ class PostList extends HTMLElement {
     const frag = document.createDocumentFragment()
     const posts = await getPostList('./data.json')
 
-    posts.forEach(post => {
+    posts.forEach((post, i) => {
       card = document.createElement('post-card')
       card.postData = post
       card.id = post.id
+      card.style.setProperty('--delay', `${i / 10}s`)
 
       li = document.createElement('li')
       li.append(card)

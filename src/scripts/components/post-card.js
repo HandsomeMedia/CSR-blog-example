@@ -1,4 +1,6 @@
-const template = (imgSrc, title, summary) => /*html*/ `
+import { fadeOnLoad } from '../utils.js'
+
+const template = data => /*html*/ `
 <style>
   :host{
     display: flex;
@@ -9,6 +11,7 @@ const template = (imgSrc, title, summary) => /*html*/ `
     background-color: rgba(255,255,255,.7);
     -webkit-backdrop-filter: var(--bg-blur);
     backdrop-filter: var(--bg-blur);
+    animation: fade-in 1s var(--delay) ease-out both;
   }
 
   figure, article{
@@ -55,13 +58,19 @@ const template = (imgSrc, title, summary) => /*html*/ `
     -webkit-line-clamp: 3;
   }
 
+  @keyframes fade-in{
+    from{
+      opacity: 0;
+    }
+  }
+
 </style>
 <figure>
-  <img src="${imgSrc}" loading="lazy">
+  <img src="${data.image}" loading="lazy">
 </figure>
 <article>
-  <h2 class="title">${title}</h2>
-  <p class="summary">${summary}</p>
+  <h2 class="title">${data.title}</h2>
+  <p class="summary">${data.content}</p>
 </article>
 `
 
@@ -73,7 +82,8 @@ class PostCard extends HTMLElement {
   }
 
   set postData(data) {
-    this.shadowRoot.innerHTML = template(data.image, data.title, data.content)
+    this.shadowRoot.innerHTML = template(data)
+    this.shadowRoot.querySelectorAll('img').forEach(img => fadeOnLoad(img, 1000))
   }
 }
 
