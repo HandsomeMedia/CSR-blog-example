@@ -1,7 +1,12 @@
 @import './vars.css';
 
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+  vertical-align: middle;
 }
 
 body {
