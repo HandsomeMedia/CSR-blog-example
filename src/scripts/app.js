@@ -5,26 +5,40 @@ import './components/post-card.js'
 import { appState } from './app-state.js'
 
 let viewEl
+const urlParams = new URLSearchParams(document.location.search)
 
 async function init() {
   appState.subscribe(handleAppState)
-  appState.view = 'post-list'
+  window.addEventListener('popstate', handleHistory)
 
-  document.querySelector('header').addEventListener('click', e => (appState.view = 'post-list'))
+  if (urlParams.has('id')) {
+    appState.detailId = urlParams.get('id')
+    appState.view = 'post-detail'
+  } else {
+    appState.view = 'post-list'
+  }
 }
 
 function handleAppState(state, oldState) {
   if (state.view !== oldState.view) renderView(state.view)
 }
 
-function renderView(newViewName) {
-  const newViewEl = document.createElement(newViewName)
+function handleHistory(e) {
+  appState.detailId = e.state?.detailId ?? ''
+  appState.view = e.state?.view ?? 'post-list'
+}
+
+function renderView(viewName) {
+  const newViewEl = document.createElement(viewName)
+  const url = appState.detailId ? `/?id=${appState.detailId}` : null
 
   if (viewEl) {
     viewEl.replaceWith(newViewEl)
+    history.pushState({ view: viewName, id: appState.detailId }, null, url)
   } else {
     document.body.append(newViewEl)
   }
+
   viewEl = newViewEl
 }
 
