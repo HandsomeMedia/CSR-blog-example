@@ -1,4 +1,4 @@
-import '../components/post-card.js'
+import { getPostList } from '../services/data.service.js'
 
 const template = /*html*/ `
   <style>
@@ -26,25 +26,37 @@ class PostList extends HTMLElement {
 
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = template
+    this.ul = this.shadowRoot.querySelector('ul')
   }
 
-  set blogData(data) {
+  async connectedCallback() {
     let li, card
-    const oldList = this.shadowRoot.querySelector('ul')
-    const newList = document.createElement('ul')
+    const frag = document.createDocumentFragment()
+    const posts = await getPostList('./data.json')
 
-    data.posts.forEach(post => {
+    posts.forEach(post => {
       card = document.createElement('post-card')
       card.postData = post
       card.id = post.id
 
       li = document.createElement('li')
       li.append(card)
-
-      newList.append(li)
+      frag.append(li)
     })
 
-    oldList.replaceWith(newList)
+    this.ul.append(frag)
+
+    this.addEventListener('click', this)
+  }
+
+  handleEvent(e) {
+    const target = e.composedPath()[0]
+
+    console.log(e, target, target.tagName)
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this)
   }
 }
 
