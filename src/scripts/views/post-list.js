@@ -4,11 +4,14 @@ const template = /*html*/ `
   <style>
     :host{
       display: block;
-      max-width: 1000px;
+      max-width: var(--max-width);
       margin: auto;
     }
 
     ul{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: var(--space-lg);
       list-style: none;
       margin: 0;
       padding: 0;

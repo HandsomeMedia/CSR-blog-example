@@ -1,12 +1,64 @@
 const template = (imgSrc, title, summary) => /*html*/ `
 <style>
+  :host{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    border-radius: 8px 8px 2px 2px;
+    background-color: var(--off-white);
+    overflow: hidden;
+  }
+
+  figure, article{
+    margin: 0;
+  }
+
+  figure {
+    position: relative;
+    padding-bottom: 42%;
+  }
+
+  figure img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  article {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: var(--space-md);
+  }
+
+  article > * {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  article .title{
+    margin-bottom: var(--space-sm);
+    font-family: var(--title-font);
+    font-size: var(--h2-size);
+    -webkit-line-clamp: 2;
+  }
+
+  article .summary{
+    color: var(--medium-gray);
+    -webkit-line-clamp: 3;
+  }
+
 </style>
-<article>
+<figure>
   <img src="${imgSrc}" loading="lazy">
-  <div class="text">
-    <h2 class="title">${title}</h2>
-    <p class="summary">${summary}</p>
-  </div>
+</figure>
+<article>
+  <h2 class="title">${title}</h2>
+  <p class="summary">${summary}</p>
 </article>
 `
 

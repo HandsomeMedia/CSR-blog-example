@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=block');
+
+:root{
+  --off-white: #eee;
+  --light-gray: #ccc;
+  --medium-gray: #666;
+  --dark-gray: #222;
+
+  --title-font: 'Fjalla One', sans-serif;
+  --default-font: 'Arial', sans-serif;
+
+  --h1-size: 2rem;
+  --h2-size: 1.5rem;
+  --p-size: 1rem;
+
+  --space-sm: .5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+
+  --max-width: 1200px;
+  --border-radius: 6px;
+}
