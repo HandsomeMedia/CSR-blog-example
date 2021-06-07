@@ -1,3 +1,4 @@
+import { appState } from '../app-state.js'
 import { getPostList } from '../services/data.service.js'
 
 const template = /*html*/ `
@@ -15,6 +16,10 @@ const template = /*html*/ `
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    post-card{
+      cursor: pointer;
     }
   </style>
   <ul></ul>
@@ -53,6 +58,12 @@ class PostList extends HTMLElement {
     const target = e.composedPath()[0]
 
     console.log(e, target, target.tagName)
+    switch (target.tagName) {
+      case 'POST-CARD':
+        appState.detailId = target.id
+        appState.view = 'post-detail'
+        break
+    }
   }
 
   disconnectedCallback() {

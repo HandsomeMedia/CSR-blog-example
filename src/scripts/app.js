@@ -1,12 +1,28 @@
 import './views/post-list.js'
 import './components/bg-anim.js'
+import './components/post-card.js'
+import { appState } from './app-state.js'
 
-const postList = document.querySelector('post-list')
+let viewEl
 
 async function init() {
-  const data = await fetch('./data.json').then(response => response.json())
+  appState.subscribe(handleAppState)
+  appState.view = 'post-list'
+}
 
-  postList.blogData = data
+function handleAppState(state, oldState) {
+  if (state.view !== oldState.view) renderView(state.view)
+}
+
+function renderView(newViewName) {
+  const newViewEl = document.createElement(newViewName)
+
+  if (viewEl) {
+    viewEl.replaceWith(newViewEl)
+  } else {
+    document.body.append(newViewEl)
+  }
+  viewEl = newViewEl
 }
 
 init()

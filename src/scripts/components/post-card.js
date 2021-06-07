@@ -13,6 +13,7 @@ const template = (imgSrc, title, summary) => /*html*/ `
 
   figure, article{
     margin: 0;
+    pointer-events: none;
   }
 
   figure {
