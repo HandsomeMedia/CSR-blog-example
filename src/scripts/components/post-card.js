@@ -4,9 +4,11 @@ const template = (imgSrc, title, summary) => /*html*/ `
     display: flex;
     flex-flow: column;
     height: 100%;
-    border-radius: 8px 8px 2px 2px;
-    background-color: var(--off-white);
+    border-radius: var(--border-radius);
     overflow: hidden;
+    background-color: rgba(255,255,255,.8);
+    -webkit-backdrop-filter: var(--bg-blur);
+    backdrop-filter: var(--bg-blur);
   }
 
   figure, article{

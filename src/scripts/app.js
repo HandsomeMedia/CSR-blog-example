@@ -1,4 +1,5 @@
 import './views/post-list.js'
+import './components/bg-anim.js'
 
 const postList = document.querySelector('post-list')
 
