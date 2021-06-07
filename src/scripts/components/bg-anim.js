@@ -1,12 +1,21 @@
+import { appState } from '../app-state.js'
+
 const template = /*html*/ `
 <style>
   :host{
+    contain: content;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
+    transition: opacity .5s ease-out;
+  }
+
+  :host([paused]){
+    opacity: .2;
+    filter: var(--bg-blur);
   }
 
   .pink-blob{
@@ -22,6 +31,11 @@ const template = /*html*/ `
     margin-top: -25%;
     mix-blend-mode: multiply;
     animation: anim2 15s both infinite cubic-bezier(.5, 0, .5, 1);
+  }
+
+  :host([paused]) .pink-blob,
+  :host([paused]) .blue-blob{
+    animation-play-state: paused;
   }
 
   @keyframes anim1{
@@ -52,6 +66,18 @@ class BgAnim extends HTMLElement {
 
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = template
+  }
+
+  connectedCallback() {
+    this.subscription = appState.subscribe(this.handleAppState, this)
+  }
+
+  handleAppState(state, oldState) {
+    this.toggleAttribute('paused', state.view === 'post-detail')
+  }
+
+  disconnectedCallback() {
+    this.subscription.unsubscribe()
   }
 }
 

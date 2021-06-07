@@ -6,7 +6,7 @@ const template = (imgSrc, title, summary) => /*html*/ `
     height: 100%;
     border-radius: var(--border-radius);
     overflow: hidden;
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.7);
     -webkit-backdrop-filter: var(--bg-blur);
     backdrop-filter: var(--bg-blur);
   }
