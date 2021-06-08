@@ -36,7 +36,7 @@ function renderView(viewName) {
     viewEl.replaceWith(newViewEl)
     history.pushState({ view: viewName, id: appState.detailId }, null, url)
   } else {
-    document.body.append(newViewEl)
+    document.querySelector('footer').before(newViewEl)
   }
 
   window.scroll(0, 0)

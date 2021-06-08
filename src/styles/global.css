@@ -53,6 +53,17 @@ h2 {
   margin: var(--space-sm) 0;
 }
 
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: var(--max-width);
+  padding: var(--space-lg) var(--space-md);
+  margin: auto;
+  font-size: var(--small-size);
+  text-transform: uppercase;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;

@@ -22,6 +22,9 @@ const template = data => /*html*/ `
       position: relative;
       margin: 0;
       padding-bottom: 42%;
+      border-bottom: 12px solid #ff6b4d;
+      border-radius: var(--border-radius);
+      overflow: hidden;
     }
 
     figure img {
@@ -29,7 +32,6 @@ const template = data => /*html*/ `
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: var(--border-radius)
     }
 
     header h1{
@@ -47,6 +49,7 @@ const template = data => /*html*/ `
       grid-auto-flow: column;
       gap: var(--space-sm);
       align-items: center;
+      margin: var(--space-md) 0;
     }
 
     .details a,
