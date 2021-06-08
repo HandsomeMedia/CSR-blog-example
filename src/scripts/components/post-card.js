@@ -3,6 +3,7 @@ import { fadeOnLoad } from '../utils.js'
 const template = data => /*html*/ `
 <style>
   :host{
+    contain: content;
     display: flex;
     flex-flow: column;
     height: 100%;

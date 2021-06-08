@@ -3,18 +3,26 @@ import { appState } from '../app-state.js'
 const template = /*html*/ `
 <style>
   :host{
-    contain: content;
+    contain: strict;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-    transition: opacity .5s ease-out;
+    animation: fade-in 4s both ease-in;
   }
 
-  :host([paused]){
+  .blobs{
+    transition: opacity 2s;
+  }
+
+  :host([paused]) .blobs{
     opacity: .2;
+  }
+
+  :host([paused]) .blobs > *{
+    animation-play-state: paused;
     filter: var(--bg-blur);
   }
 
@@ -33,9 +41,10 @@ const template = /*html*/ `
     animation: anim2 15s both infinite cubic-bezier(.5, 0, .5, 1);
   }
 
-  :host([paused]) .pink-blob,
-  :host([paused]) .blue-blob{
-    animation-play-state: paused;
+  @keyframes fade-in{
+    from{
+      opacity: 0;
+    }
   }
 
   @keyframes anim1{
@@ -56,8 +65,10 @@ const template = /*html*/ `
     100% { transform: scale(1)   translate(200px, -100px); }
   }
 </style>
-<img class="pink-blob" src="../../assets/blob1.svg">
-<img class="blue-blob" src="../../assets/blob2.svg">
+<div class="blobs">
+  <img class="pink-blob" src="../../assets/blob1.svg">
+  <img class="blue-blob" src="../../assets/blob2.svg">
+</div>
 `
 
 class BgAnim extends HTMLElement {
@@ -70,14 +81,37 @@ class BgAnim extends HTMLElement {
 
   connectedCallback() {
     this.subscription = appState.subscribe(this.handleAppState, this)
+    window.addEventListener('blur', this)
+    window.addEventListener('focus', this)
+  }
+
+  handleEvent(e) {
+    console.log('handleEvent', e)
+    switch (e.type) {
+      case 'blur':
+        this.pauseAnimation(true)
+        break
+      case 'focus':
+        this.pauseAnimation(false)
+        break
+    }
   }
 
   handleAppState(state, oldState) {
-    this.toggleAttribute('paused', state.view === 'post-detail')
+    if (state.view !== oldState.view) this.pauseAnimation(state.view === 'post-detail')
+  }
+
+  pauseAnimation(bool) {
+    // pause animation for detail view, or when navigating to new window/tab to preserve CPU
+    if (!bool && appState.view === 'post-detail') return // don't unpause in detail view
+    console.log('pause:', bool)
+    this.toggleAttribute('paused', bool)
   }
 
   disconnectedCallback() {
     this.subscription.unsubscribe()
+    window.removeEventListener('blur', this)
+    window.removeEventListener('focus', this)
   }
 }
 

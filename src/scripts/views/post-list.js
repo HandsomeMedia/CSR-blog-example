@@ -4,6 +4,7 @@ import { getPostList } from '../services/data.service.js'
 const template = /*html*/ `
   <style>
     :host{
+      contain: content;
       display: block;
       max-width: var(--max-width);
       margin: auto;
@@ -11,7 +12,7 @@ const template = /*html*/ `
 
     ul{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(320px,100%), 1fr));
       gap: var(--space-lg);
       list-style: none;
       margin: 0;
