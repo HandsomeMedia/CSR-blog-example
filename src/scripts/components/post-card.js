@@ -12,7 +12,7 @@ const template = data => /*html*/ `
     background-color: rgba(255,255,255,.7);
     -webkit-backdrop-filter: var(--bg-blur);
     backdrop-filter: var(--bg-blur);
-    animation: fade-in .75s var(--delay) both;
+    animation: fly-up .5s var(--delay) ease-out both;
   }
 
   figure, article{
@@ -59,9 +59,10 @@ const template = data => /*html*/ `
     -webkit-line-clamp: 3;
   }
 
-  @keyframes fade-in{
+  @keyframes fly-up{
     from{
       opacity: 0;
+      transform: translateY(5%);
     }
   }
 

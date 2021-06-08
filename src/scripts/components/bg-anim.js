@@ -3,7 +3,7 @@ import { appState } from '../app-state.js'
 const template = /*html*/ `
 <style>
   :host{
-    contain: strict;
+    contain: content;
     position: fixed;
     top: 0;
     left: 0;
