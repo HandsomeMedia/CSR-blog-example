@@ -31,6 +31,7 @@ const template = /*html*/ `
     top: 50%;
     margin-top: -25%;
     animation: anim1 20s both infinite cubic-bezier(.5, 0, .5, 1);
+    will-change: transform;
   }
 
   .blue-blob{
@@ -39,6 +40,7 @@ const template = /*html*/ `
     margin-top: -25%;
     mix-blend-mode: multiply;
     animation: anim2 15s both infinite cubic-bezier(.5, 0, .5, 1);
+    will-change: transform;
   }
 
   @keyframes fade-in{
@@ -66,8 +68,8 @@ const template = /*html*/ `
   }
 </style>
 <div class="blobs">
-  <img class="pink-blob" src="../../assets/blob1.svg">
-  <img class="blue-blob" src="../../assets/blob2.svg">
+  <img class="pink-blob" src="../../assets/blob1.svg" alt="Pink moving blob">
+  <img class="blue-blob" src="../../assets/blob2.svg" alt="Blue moving blob">
 </div>
 `
 
@@ -86,7 +88,6 @@ class BgAnim extends HTMLElement {
   }
 
   handleEvent(e) {
-    console.log('handleEvent', e)
     switch (e.type) {
       case 'blur':
         this.pauseAnimation(true)
@@ -104,7 +105,6 @@ class BgAnim extends HTMLElement {
   pauseAnimation(bool) {
     // pause animation for detail view, or when navigating to new window/tab to preserve CPU
     if (!bool && appState.view === 'post-detail') return // don't unpause in detail view
-    console.log('pause:', bool)
     this.toggleAttribute('paused', bool)
   }
 

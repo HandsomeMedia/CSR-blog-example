@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=block');
 
 :root{
   --off-white: #f4f6f2;
   --light-gray: #b4b6b2;
   --medium-gray: #666;
   --dark-gray: #222;
+  --coral: #ff6b4d;
 
-  --title-font: 'Fjalla One', sans-serif;
+  --title-font: 'Khand', sans-serif;
   --default-font: 'Arial', sans-serif;
 
   --h1-size: 2.5rem;

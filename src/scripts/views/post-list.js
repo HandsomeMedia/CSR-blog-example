@@ -59,7 +59,6 @@ class PostList extends HTMLElement {
   handleEvent(e) {
     const target = e.composedPath()[0]
 
-    console.log(e, target, target.tagName)
     switch (target.tagName) {
       case 'POST-CARD':
         appState.detailId = target.id

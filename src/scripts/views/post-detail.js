@@ -22,7 +22,7 @@ const template = data => /*html*/ `
       position: relative;
       margin: 0;
       padding-bottom: 42%;
-      border-bottom: 12px solid #ff6b4d;
+      border-bottom: 12px solid var(--coral);
       border-radius: var(--border-radius);
       overflow: hidden;
     }
@@ -106,19 +106,7 @@ class PostDetail extends HTMLElement {
     const data = await getPostDetail('./data.json', appState.detailId)
 
     this.shadowRoot.innerHTML = template(data)
-    this.shadowRoot.querySelectorAll('img').forEach(img => fadeOnLoad(img, 1000))
-
-    this.addEventListener('click', this)
-  }
-
-  handleEvent(e) {
-    const target = e.composedPath()[0]
-
-    console.log(e, target)
-  }
-
-  disconnectedCallback() {
-    this.removeEventListener('click', this)
+    fadeOnLoad(this.shadowRoot.querySelector('figure img'), 1000)
   }
 }
 

@@ -12,7 +12,8 @@ const template = data => /*html*/ `
     background-color: rgba(255,255,255,.7);
     -webkit-backdrop-filter: var(--bg-blur);
     backdrop-filter: var(--bg-blur);
-    animation: fly-up .5s var(--delay) ease-out both;
+    animation: fly-up .4s var(--delay) ease-out both;
+    will-change: transform, opacity;
   }
 
   figure, article{
@@ -23,6 +24,7 @@ const template = data => /*html*/ `
   figure {
     position: relative;
     padding-bottom: 42%;
+    border-bottom: 6px solid var(--coral);
   }
 
   figure img {
