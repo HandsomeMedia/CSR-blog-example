@@ -39,6 +39,7 @@ function renderView(viewName) {
     document.body.append(newViewEl)
   }
 
+  window.scroll(0, 0)
   viewEl = newViewEl
 }
 

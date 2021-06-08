@@ -17,4 +17,18 @@ function fadeOnLoad(img, delay) {
   }
 }
 
-export { fadeOnLoad }
+function formatDate(iso) {
+  const date = new Date(iso)
+  const elapsedMin = (Date.now() - date) / 60000
+  const elapsedHrs = (Date.now() - date) / 3600000
+
+  if (elapsedMin < 1) return 'less than a minute ago'
+
+  if (elapsedMin < 60) return `${Math.floor(elapsedMin)} minute${elapsedMin < 2 ? '' : 's'} ago`
+
+  if (elapsedHrs < 12) return `${Math.floor(elapsedHrs)} hour${elapsedHrs < 2 ? '' : 's'} ago`
+
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
+export { fadeOnLoad, formatDate }

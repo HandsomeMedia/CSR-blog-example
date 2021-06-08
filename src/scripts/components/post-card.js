@@ -12,7 +12,7 @@ const template = data => /*html*/ `
     background-color: rgba(255,255,255,.7);
     -webkit-backdrop-filter: var(--bg-blur);
     backdrop-filter: var(--bg-blur);
-    animation: fade-in 1s var(--delay) ease-out both;
+    animation: fade-in .75s var(--delay) both;
   }
 
   figure, article{
@@ -67,7 +67,7 @@ const template = data => /*html*/ `
 
 </style>
 <figure>
-  <img src="${data.image}" loading="lazy">
+  <img src="${data.image}" loading="lazy" alt="Article preview">
 </figure>
 <article>
   <h2 class="title">${data.title}</h2>

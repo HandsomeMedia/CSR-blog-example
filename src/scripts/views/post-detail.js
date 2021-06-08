@@ -1,6 +1,6 @@
 import { appState } from '../app-state.js'
 import { getPostDetail } from '../services/data.service.js'
-import { fadeOnLoad } from '../utils.js'
+import { fadeOnLoad, formatDate } from '../utils.js'
 
 const template = data => /*html*/ `
   <style>
@@ -85,7 +85,7 @@ const template = data => /*html*/ `
             <span>${data.author.displayName}</span>
           </a>
         </address>
-        <time datetime="${data.published}">${data.published}</time>
+        <time datetime="${data.published}">${formatDate(data.published)}</time>
       </div>
     </header>
     <p>${data.content}</p>
